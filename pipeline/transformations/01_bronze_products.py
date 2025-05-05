@@ -5,8 +5,7 @@ from pyspark.sql.functions import col
   name="bronze_products",
   comment="Raw ingested product data with constraints."
 )
-@dlt.expect("valid_product_id", "product_id IS NOT NULL")
-@dlt.expect("valid_price", "price >= 0")
+
 def bronze_products():
     return (
         spark.readStream

@@ -8,12 +8,13 @@ from pyspark.sql.functions import col
 @dlt.expect("valid_quantity", "quantity >= 0")
 @dlt.expect("known_product", "product_id IS NOT NULL")
 @dlt.expect("known_customer", "customer_id IS NOT NULL")
+@dlt.expect_or_drop("valid_customer", col("customer_name").isNotNull())
 def silver_sales():
     sales = dlt.read_stream("bronze_sales")
     products = dlt.read("silver_products")
     customers = dlt.read("silver_customers")
 
-    return (
+    df = (
         sales
             .dropDuplicates(["sale_id"])
             .join(products, on="product_id", how="left")
@@ -32,3 +33,5 @@ def silver_sales():
                 col("sale_date")
             )
     )
+
+    return df

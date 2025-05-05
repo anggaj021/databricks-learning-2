@@ -5,7 +5,7 @@ from pyspark.sql.functions import col
   name="bronze_customers",
   comment="Raw ingested customer data with constraints."
 )
-@dlt.expect("valid_customer_id", "customer_id IS NOT NULL")
+
 def bronze_customers():
     return (
         spark.readStream

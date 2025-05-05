@@ -6,8 +6,9 @@ from pyspark.sql.functions import col
   comment="Cleaned and deduplicated product data ready for consumption."
 )
 @dlt.expect("price_positive", "price >= 0")
+#@dlt.expect_or_drop("product_name_not_null", col("name").isNotNull())
 def silver_products():
-    return (
+    df = (
         dlt.read_stream("bronze_products")
         .dropDuplicates(["product_id"])
         .filter(col("product_name").isNotNull())
@@ -18,3 +19,5 @@ def silver_products():
             col("price").cast("double")
         )
     )
+
+    return df

@@ -5,7 +5,7 @@ from pyspark.sql.functions import col
   name="bronze_sales",
   comment="Raw sales data from CSV files"
 )
-@dlt.expect("valid_sale_id", "sale_id IS NOT NULL")
+
 def bronze_sales():
     return (
         spark.readStream

@@ -11,8 +11,8 @@ sales_path = "/Volumes/angga/default/data/sales/"
 
 # Simulated new data (e.g. new file arrives from upstream system)
 new_sales = [
-    Row(sale_id=1006, product_id=2, customer_id=504, quantity=4, sale_date="2024-04-05"),
-    Row(sale_id=1007, product_id=3, customer_id=502, quantity=6, sale_date="2024-04-06")
+    Row(sale_id=1007, product_id=3, customer_id=502, quantity=6, sale_date="2024-04-06"),
+    Row(sale_id=1008, product_id=2, customer_id=504, quantity=4, sale_date="2024-04-05")
 ]
 
 new_sales_df = spark.createDataFrame(new_sales)
